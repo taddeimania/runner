@@ -4,8 +4,7 @@
   <title>Impact Game</title>
   <style type="text/css">
   html,body {
-    background-color: #333;
-    color: #fff;
+    background-color: white;
     font-family: helvetica, arial, sans-serif;
     margin: 0;
     padding: 0;
@@ -13,6 +12,7 @@
   }
 
   #canvas {
+    border: 20px solid white;
     position: absolute;
     left: 0;
     right: 0;
@@ -20,13 +20,32 @@
     bottom: 0;
     margin: auto;
   }
+  .logo {
+    transform:rotate(9deg);
+    -ms-transform:rotate(9deg); /* IE 9 */
+    -webkit-transform:rotate(9deg); /* Safari and Chrome */
+    position: absolute;
+    top: -500px;
+    left: 0;
+    right: -200px;
+    bottom: 0;
+    margin: auto;
+    z-index: 2;
+  }
+  .shadow {
+    -webkit-box-shadow: 0px 0px 20px 0px rgba(50, 50, 50, 0.75);
+    -moz-box-shadow:    0px 0px 20px 0px rgba(50, 50, 50, 0.75);
+    box-shadow:         0px 0px 20px 0px rgba(50, 50, 50, 0.75);
+  }
   </style>
 
-  <script type="text/javascript" src="lib/impact/impact.js"></script>
-  <script type="text/javascript" src="lib/game/main.js"></script>
+  <!-- <script type="text/javascript" src="lib/impact/impact.js"></script> -->
+  <!-- <script type="text/javascript" src="lib/game/main.js"></script> -->
+  <script type="text/javascript" src="game.min.js"></script>
 </head>
 
 <body>
-  <canvas id="canvas"></canvas>
+  <img src="media/logo.png" class="logo"/>
+  <canvas id="canvas" class="shadow"></canvas>
 </body>
 </html>

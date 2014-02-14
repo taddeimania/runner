@@ -5,11 +5,11 @@ ig.module(
 ).requires(
   'impact.game',
   'game.levels.title',
+  'game.entities.guy',
   'impact.font'
 ).defines ->
 
   RunnerGame = ig.Game.extend
-    font: new ig.Font 'media/04b03.font.png'
     init: ->
       @loadLevel LevelTitle
 
@@ -17,12 +17,10 @@ ig.module(
       @parent()
 
     draw: ->
+      guy = ig.game.getEntitiesByType('EntityGuy')[0]
+      guy_x = guy.pos.x
+      @screen.x = guy_x - 100
+
       @parent()
-      x = ig.system.width/2
-      y = ig.system.height/2
-      @screen.x += 2
-
-      @font.draw 'It Works!', x, y, ig.Font.ALIGN.CENTER
-
 
   ig.main '#canvas', RunnerGame, 60, 320, 480, 1
