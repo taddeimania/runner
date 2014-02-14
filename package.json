@@ -6,6 +6,7 @@
     "grunt": "~0.4.2",
     "grunt-cli": "~0.1.13",
     "grunt-contrib-coffee": "",
+    "grunt-contrib-watch": "",
     "coffee-script": "~1.7.1"
   },
   "author": "Joel Taddei @taddeimania"

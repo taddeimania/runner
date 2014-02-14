@@ -12,5 +12,11 @@ module.exports = (grunt) ->
         dest: 'lib/game/'
         ext: '.js'
 
+    watch:
+      scripts:
+        files: ['coffee/**/*.coffee']
+        tasks: ['coffee']
+
   grunt.loadNpmTasks 'grunt-contrib-coffee'
-  grunt.registerTask 'default', ['coffee']
+  grunt.loadNpmTasks 'grunt-contrib-watch'
+  grunt.registerTask 'default', ['watch']
