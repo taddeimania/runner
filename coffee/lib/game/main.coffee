@@ -1,12 +1,9 @@
-RunnerGame = null
-
 ig.module(
   'game.main'
 ).requires(
   'impact.game',
-  'game.levels.title',
   'game.entities.guy',
-  'impact.font'
+  'game.levels.title'
 ).defines ->
 
   RunnerGame = ig.Game.extend
@@ -24,3 +21,5 @@ ig.module(
       @parent()
 
   ig.main '#canvas', RunnerGame, 60, 320, 480, 1
+
+  return

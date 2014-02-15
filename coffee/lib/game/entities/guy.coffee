@@ -1,5 +1,3 @@
-EntityGuy = null
-
 ig.module(
     'game.entities.guy'
 ).requires(
@@ -12,13 +10,15 @@ ig.module(
       x: 32
       y: 40
     init: (x, y, settings) ->
-      @accel.x = 10
+      @vel.x = 100
       @parent x, y, settings
       @addAnim 'idle', 1, [0]
-      @addAnim 'walking', 0.1, [0, 1]
+      @addAnim 'walking', 0.1, [0, 1, 2]
       @currentAnim = @anims.idle
 
     draw: ->
-      if @accel.x > 0
+      if @vel.x > 0
         @currentAnim = @anims.walking
       @parent()
+
+  return
