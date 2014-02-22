@@ -2,7 +2,7 @@ ig.module('game.entities.triggers.scoreTrigger')
 .requires(
   'impact.entity'
 ).defines ->
-  lr.EntityScoreTrigger = ig.Entity.extend
+  window.EntityScoreTrigger = ig.Entity.extend
     size:
       x: 10
       y: 200
@@ -12,5 +12,6 @@ ig.module('game.entities.triggers.scoreTrigger')
     activated: true
     check: (other) ->
       if @activated
-        lr.SCORE += 1
+        window.SCORE += 1
         @activated = false
+  return

@@ -2,7 +2,7 @@ ig.module('game.entities.triggers.startTrigger')
 .requires(
     'impact.entity'
 ).defines ->
-  lr.EntityStartTrigger = ig.Entity.extend
+  window.EntityStartTrigger = ig.Entity.extend
     size:
       x: 10
       y: 200
@@ -14,3 +14,4 @@ ig.module('game.entities.triggers.startTrigger')
       if @activated
         ig.game.tracking = true
         this.activated = false
+  return

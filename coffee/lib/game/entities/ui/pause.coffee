@@ -2,7 +2,7 @@ ig.module('game.entities.ui.pause')
 .requires(
     'game.entities.ui.baseUIButton'
 ).defines ->
-  lr.EntityPause = EntityBaseUIButton.extend
+  window.EntityPause = window.EntityBaseUIButton.extend
     animSheet: new ig.AnimationSheet 'media/pause.png', 33, 33
     size:
       x: 50
@@ -14,3 +14,5 @@ ig.module('game.entities.ui.pause')
       if started.activated
           ig.game.tracking = false
       ig.game.pause()
+
+  return

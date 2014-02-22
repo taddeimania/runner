@@ -2,7 +2,7 @@ ig.module('game.entities.ui.border')
 .requires(
     'impact.entity'
 ).defines ->
-  lr.EntityBorder = ig.Entity.extend
+  window.EntityBorder = ig.Entity.extend
     animSheet: new ig.AnimationSheet 'media/uitopborder.png', 320, 107
     size:
       x: 320
@@ -12,3 +12,4 @@ ig.module('game.entities.ui.border')
       @parent x, y, settings
       @addAnim 'normal', 1, [0]
       @currentAnim = @anims.normal
+  return

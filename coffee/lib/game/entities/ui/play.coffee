@@ -2,7 +2,7 @@ ig.module('game.entities.ui.play')
 .requires(
     'impact.entity'
 ).defines ->
-  lr.EntityPlay = ig.Entity.extend
+  window.EntityPlay = ig.Entity.extend
     animSheet: new ig.AnimationSheet 'media/play.png', 137, 13
     size:
       x: 167
@@ -19,3 +19,4 @@ ig.module('game.entities.ui.play')
       ig.input.pressed('click') and
         (ig.input.mouse.y > @pos.y and ig.input.mouse.y < @pos.y + @size.y) and
         (ig.input.mouse.x + ig.game.screen.x > @pos.x and ig.input.mouse.x + ig.game.screen.x < @pos.x + @size.x);
+  return

@@ -3,7 +3,7 @@ ig.module('game.entities.guy')
   'game.system.eventChain',
   'impact.entity'
 ).defines ->
-  lr.EntityGuy = ig.Entity.extend
+  window.EntityGuy = ig.Entity.extend
     animSheet: new ig.AnimationSheet 'media/guy.png', 32, 40
     size:
       x: 26
@@ -49,16 +49,17 @@ ig.module('game.entities.guy')
       @finishEvent = EventChain(@)
         .wait(2)
         .then ->
-          ig.game.startingScore = lr.SCORE
+          ig.game.startingScore = window.SCORE
           @finished = false
-          lr.CURRENT_LEVEL = ig.global[nextLevel]
-          ig.game.loadLevel lr.CURRENT_LEVEL
+          window.CURRENT_LEVEL = ig.global[nextLevel]
+          ig.game.loadLevel window.CURRENT_LEVEL
           ig.game.guy = ig.game.getEntitiesByType('EntityGuy')[0]
-          ig.game.uiBG = ig.game.spawnEntity lr.EntityBorder, 143, 0
+          ig.game.uiBG = ig.game.spawnEntity window.EntityBorder, 143, 0
           ig.game.screen.x = ig.game.guy.pos.x
           ig.game.tracking = false
-          ig.game.pauseButton = ig.game.spawnEntity lr.EntityPause, ig.game.guy.pos.x + 40, 65
+          ig.game.pauseButton = ig.game.spawnEntity window.EntityPause, ig.game.guy.pos.x + 40, 65
 
     checkVerticalMovement: ->
       if  @standing and ig.input.pressed('jump') and ig.input.mouse.y > 100
         @vel.y = -@jump
+  return
