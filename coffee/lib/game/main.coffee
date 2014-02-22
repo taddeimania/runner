@@ -1,6 +1,4 @@
-window.lr = {}   # Global Namespace
-
-window.VERSION = '0.03'
+window.VERSION = '0.04'
 window.CURRENT_GAME = undefined
 window.CURRENT_LEVEL = undefined
 window.SCORE = 0
