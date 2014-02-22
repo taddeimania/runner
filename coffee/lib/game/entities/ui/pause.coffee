@@ -1,6 +1,6 @@
 ig.module('game.entities.ui.pause')
 .requires(
-    'game.entities.ui.baseUIButton'
+  'game.entities.ui.baseUIButton'
 ).defines ->
   window.EntityPause = window.EntityBaseUIButton.extend
     animSheet: new ig.AnimationSheet 'media/pause.png', 33, 33

@@ -1,6 +1,6 @@
 ig.module('game.entities.ui.quit')
 .requires(
-    'game.entities.ui.baseUIButton'
+  'game.entities.ui.baseUIButton'
 ).defines ->
   window.EntityQuit = window.EntityBaseUIButton.extend
     animSheet: new ig.AnimationSheet 'media/quit.png', 130, 40

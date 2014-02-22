@@ -70,7 +70,7 @@ ig.module('game.main')
           window.CURRENT_LEVEL = LevelFirstLevel
       ig.input.bind ig.KEY.MOUSE1, 'jump'
       # DEBUG: SET THIS TO WHATEVER LEVEL YOU WANT TO TEST LEVEL DESIGN
-      window.CURRENT_LEVEL = LevelThirdLevel
+      # window.CURRENT_LEVEL = LevelThirdLevel
       # END DEBUG
       @loadLevel window.CURRENT_LEVEL
       @guy = ig.game.getEntitiesByType('EntityGuy')[0]
@@ -99,7 +99,7 @@ ig.module('game.main')
       @guy and ((@guy.pos.y > @screen.y + 480) or (@screen.x > @guy.pos.x + 40))
 
     pause: ->
-      ig.Timer.timeScale = (ig.Timer.timeScale == 0 ? 1 : 0)
+      ig.Timer.timeScale = if ig.Timer.timeScale == 0 then 1 else 0
       @_paused = ig.Timer.timeScale == 0
 
     killGuy: ->

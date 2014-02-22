@@ -1,6 +1,6 @@
 ig.module('game.entities.ui.play')
 .requires(
-    'impact.entity'
+  'impact.entity'
 ).defines ->
   window.EntityPlay = ig.Entity.extend
     animSheet: new ig.AnimationSheet 'media/play.png', 137, 13

@@ -12,7 +12,7 @@ ig.module('game.entities.guy')
       x: 3
       y: 6
     maxVel:
-      x: 175
+      x: 1
       y: 300
     friction:
       x: 1

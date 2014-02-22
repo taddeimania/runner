@@ -1,6 +1,6 @@
 ig.module('game.entities.triggers.startTrigger')
 .requires(
-    'impact.entity'
+  'impact.entity'
 ).defines ->
   window.EntityStartTrigger = ig.Entity.extend
     size:

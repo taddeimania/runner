@@ -1,6 +1,6 @@
 ig.module('game.entities.ui.logo')
 .requires(
-    'impact.entity'
+  'impact.entity'
 ).defines ->
   window.EntityLogo = ig.Entity.extend
     animSheet: new ig.AnimationSheet('media/logo.png', 286, 39),
