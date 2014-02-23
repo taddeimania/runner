@@ -29,5 +29,6 @@ ig.module('game.entities.locks.baseLock')
 
     unlockEvent: ->
       @currentAnim = @anims.grey
+      func = new Function(@triggerEvent).bind(@)()
 
   return

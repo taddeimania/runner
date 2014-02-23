@@ -6,6 +6,3 @@ ig.module('game.entities.locks.redLock')
     colorIndex: 2
     color: 'red'
     name: 'EntityRedLock'
-    unlockEvent: ->
-      @parent()
-      func = new Function(@triggerEvent).bind(@)()
