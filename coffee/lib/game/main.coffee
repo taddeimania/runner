@@ -20,6 +20,7 @@ ig.module('game.main')
   'game.levels.firstLevel',
   'game.levels.secondLevel',
   'game.levels.thirdLevel',
+  'game.levels.fourthLevel',
   'game.levels.title'
 ).defines ->
   window.BaseScreen = ig.Game.extend
@@ -32,9 +33,9 @@ ig.module('game.main')
 
   window.StartScreen = window.BaseScreen.extend
     init: ->
-      # ig.music.add('media/music/theme.ogg');
-      # ig.music.volume = 0.1;
-      # ig.music.play();
+      # ig.music.add 'media/music/theme.ogg'
+      # ig.music.volume = 0.1
+      # ig.music.play()
       @logo = ig.game.spawnEntity window.EntityLogo, 24, 74
       @play = ig.game.spawnEntity window.EntityPlay, 24, 154
       ig.input.bind ig.KEY.MOUSE1, 'click'
@@ -68,7 +69,7 @@ ig.module('game.main')
           window.CURRENT_LEVEL = LevelFirstLevel
       ig.input.bind ig.KEY.MOUSE1, 'jump'
       # DEBUG: SET THIS TO WHATEVER LEVEL YOU WANT TO TEST LEVEL DESIGN
-      # window.CURRENT_LEVEL = LevelThirdLevel
+      # window.CURRENT_LEVEL = LevelFourthLevel
       # END DEBUG
       @loadLevel window.CURRENT_LEVEL
       @guy = ig.game.getEntitiesByType('EntityGuy')[0]

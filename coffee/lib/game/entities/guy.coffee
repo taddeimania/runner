@@ -5,6 +5,7 @@ ig.module('game.entities.guy')
 ).defines ->
   window.EntityGuy = ig.Entity.extend
     animSheet: new ig.AnimationSheet 'media/guy.png', 32, 40
+    inventory: []
     size:
       x: 26
       y: 34
@@ -21,6 +22,8 @@ ig.module('game.entities.guy')
     jump: 350
     velocity: 120
     type: ig.Entity.TYPE.A
+    checkAgainst: ig.Entity.TYPE.B
+    collides: ig.Entity.COLLIDES.ACTIVE
     finished: false
     init: (x, y, settings) ->
       @parent x, y, settings
@@ -62,4 +65,19 @@ ig.module('game.entities.guy')
     checkVerticalMovement: ->
       if  @standing and ig.input.pressed('jump') and ig.input.mouse.y > 100
         @vel.y = -@jump
+
+    check: (other) ->
+      @parent()
+      if other.name.indexOf('Key') != -1
+        @inventory.push other.color
+        other.kill()
+      if other.name.indexOf('Lock') != -1 and other.untouched
+        lock_color = other.name.split('Entity')[1].split('Lock')[0]
+        if @inventory.indexOf(lock_color) != -1
+          other.unlockEvent()
+          other.locked = false
+          other.untouched = false
+        else
+          other.untouched = false
+
   return
