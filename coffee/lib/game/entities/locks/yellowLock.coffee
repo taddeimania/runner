@@ -8,4 +8,4 @@ ig.module('game.entities.locks.yellowLock')
     name: 'EntityYellowLock'
     unlockEvent: ->
       @parent()
-      ig.game.getEntityByName(@triggerName).kill()
+      func = new Function(@triggerEvent).bind(@)()

@@ -5,6 +5,7 @@ window.SCORE = 0
 
 ig.module('game.main')
 .requires(
+  # 'impact.debug.debug',
   'impact.game',
   'impact.font',
   'impact.sound',
@@ -69,7 +70,7 @@ ig.module('game.main')
           window.CURRENT_LEVEL = LevelFirstLevel
       ig.input.bind ig.KEY.MOUSE1, 'jump'
       # DEBUG: SET THIS TO WHATEVER LEVEL YOU WANT TO TEST LEVEL DESIGN
-      # window.CURRENT_LEVEL = LevelFourthLevel
+      window.CURRENT_LEVEL = LevelFourthLevel
       # END DEBUG
       @loadLevel window.CURRENT_LEVEL
       @guy = ig.game.getEntitiesByType('EntityGuy')[0]
