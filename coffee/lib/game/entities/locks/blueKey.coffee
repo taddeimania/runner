@@ -4,5 +4,5 @@ ig.module('game.entities.locks.blueKey')
 ).defines ->
   window.EntityBlueKey = EntityBaseKey.extend
     colorIndex: 3
-    color: 'blue'
+    color: 'Blue'
     name: 'EntityBlueKey'

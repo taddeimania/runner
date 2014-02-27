@@ -22,6 +22,7 @@ ig.module('game.main')
   'game.levels.secondLevel',
   'game.levels.thirdLevel',
   'game.levels.fourthLevel',
+  'game.levels.fifthLevel',
   'game.levels.title'
 ).defines ->
   window.BaseScreen = ig.Game.extend
@@ -70,7 +71,7 @@ ig.module('game.main')
           window.CURRENT_LEVEL = LevelFirstLevel
       ig.input.bind ig.KEY.MOUSE1, 'jump'
       # DEBUG: SET THIS TO WHATEVER LEVEL YOU WANT TO TEST LEVEL DESIGN
-      # window.CURRENT_LEVEL = LevelFourthLevel
+      window.CURRENT_LEVEL = LevelFifthLevel
       # END DEBUG
       @loadLevel window.CURRENT_LEVEL
       @guy = ig.game.getEntitiesByType('EntityGuy')[0]
@@ -82,7 +83,6 @@ ig.module('game.main')
     update: ->
       @parent()
       if @deathCondition()
-        @pauseButton.kill()
         @killGuy()
       @pauseButton.pos.x = @screen.x + 40
       @uiBG.pos.x = @screen.x
@@ -103,6 +103,7 @@ ig.module('game.main')
       @_paused = ig.Timer.timeScale == 0
 
     killGuy: ->
+      @pauseButton.kill()
       retry = ig.game.spawnEntity window.EntityRetry, @screen.x - 400, 180
       retry.tween({pos: {x: @screen.x + 80, y: 180}}, 0.25).start()
       quit = ig.game.spawnEntity window.EntityQuit, @screen.x + 400, 260
