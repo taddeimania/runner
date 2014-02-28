@@ -19,7 +19,7 @@ ig.module('game.entities.locks.baseKey')
       @addAnim 'color', 1, [@colorIndex]
       @currentAnim = @anims.color
     check: (other) ->
-      other.inventory.push @color.toLowerCase()
+      other.inventory.push @color
       @kill()
 
   return

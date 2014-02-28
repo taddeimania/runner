@@ -1,4 +1,4 @@
-window.VERSION = '0.05'
+window.VERSION = '0.06'
 window.CURRENT_GAME = undefined
 window.CURRENT_LEVEL = undefined
 window.SCORE = 0
@@ -71,7 +71,7 @@ ig.module('game.main')
           window.CURRENT_LEVEL = LevelFirstLevel
       ig.input.bind ig.KEY.MOUSE1, 'jump'
       # DEBUG: SET THIS TO WHATEVER LEVEL YOU WANT TO TEST LEVEL DESIGN
-      window.CURRENT_LEVEL = LevelFourthLevel
+      window.CURRENT_LEVEL = LevelFifthLevel
       # END DEBUG
       @loadLevel window.CURRENT_LEVEL
       @guy = ig.game.getEntitiesByType('EntityGuy')[0]

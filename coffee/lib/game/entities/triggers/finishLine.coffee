@@ -8,6 +8,7 @@ ig.module('game.entities.triggers.finishLine')
       y: 200
     checkAgainst: ig.Entity.TYPE.BOTH
     _wmDrawBox: true
+    gravityFactor: 0
     _wmBoxColor: 'rgba(255, 0, 0, 0.7)'
     check: (other) ->
       other.finish @nextLevel

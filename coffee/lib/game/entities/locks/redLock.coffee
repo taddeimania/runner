@@ -4,5 +4,5 @@ ig.module('game.entities.locks.redLock')
 ).defines ->
   window.EntityRedLock = EntityBaseLock.extend
     colorIndex: 2
-    color: 'red'
+    color: 'Red'
     name: 'EntityRedLock'
