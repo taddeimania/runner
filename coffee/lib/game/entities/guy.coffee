@@ -68,17 +68,6 @@ ig.module('game.entities.guy')
 
     check: (other) ->
       @parent()
-      if other.name
-        if other.name.indexOf('Key') != -1
-          @inventory.push other.color
-          other.kill()
-        if other.name.indexOf('Lock') != -1 and other.untouched
-          lock_color = other.name.split('Entity')[1].split('Lock')[0]
-          if @inventory.indexOf(lock_color) != -1
-            other.unlockEvent()
-            other.locked = false
-            other.untouched = false
-          else
-            other.untouched = false
+
 
   return

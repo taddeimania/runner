@@ -11,6 +11,7 @@ ig.module('game.entities.locks.baseLock')
       y: 32
     type: ig.Entity.TYPE.B
     collides: ig.Entity.COLLIDES.NEVER
+    checkAgainst: ig.Entity.TYPE.A
     name: undefined
     locked: true
     untouched: true
@@ -20,13 +21,14 @@ ig.module('game.entities.locks.baseLock')
       @addAnim 'color', 1, [@colorIndex]
       @addAnim 'grey', 1, [4]
       @currentAnim = @anims.color
-
-    update: ->
-      @parent()
-
-    draw: ->
-      @parent()
-
+    check: (other) ->
+      if @untouched
+        if other.inventory.indexOf(@color) != -1
+          @unlockEvent()
+          @locked = false
+          @untouched = false
+        else
+          @untouched = false
     unlockEvent: ->
       @currentAnim = @anims.grey
       func = new Function(@triggerEvent).bind(@)()
