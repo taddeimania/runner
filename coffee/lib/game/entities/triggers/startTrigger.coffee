@@ -6,12 +6,12 @@ ig.module('game.entities.triggers.startTrigger')
     size:
       x: 10
       y: 200
-    checkAgainst: ig.Entity.TYPE.BOTH
+    checkAgainst: ig.Entity.TYPE.A
     _wmDrawBox: true
     _wmBoxColor: 'rgba(0, 0, 255, 0.7)'
     activated: true
     check: (other) ->
       if @activated
         ig.game.tracking = true
-        this.activated = false
+        @activated = false
   return

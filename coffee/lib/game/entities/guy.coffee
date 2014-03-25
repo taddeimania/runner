@@ -16,11 +16,11 @@ ig.module('game.entities.guy')
       x: 1
       y: 300
     friction:
-      x: 1
+      x: 200
       y: 1
     accelAir: 600
     jump: 350
-    velocity: 120
+    velocity: 123
     type: ig.Entity.TYPE.A
     checkAgainst: ig.Entity.TYPE.B
     collides: ig.Entity.COLLIDES.ACTIVE
@@ -28,9 +28,9 @@ ig.module('game.entities.guy')
     init: (x, y, settings) ->
       @parent x, y, settings
       @vel.x = @velocity
-      @addAnim 'idle', 1, [0]
       @addAnim 'walking', 0.1, [0, 1, 2]
-      @currentAnim = @anims.idle
+      @addAnim 'standing', 0.1, [0]
+      @currentAnim = @anims.walking
 
     update: ->
       if @finishEvent
@@ -43,8 +43,8 @@ ig.module('game.entities.guy')
       @parent()
 
     draw: ->
-      if @vel.x > 0
-        @currentAnim = @anims.walking
+      if @vel.x == 0
+        @currentAnim = @anims.standing
       @parent()
 
     finish: (nextLevel) ->
@@ -67,6 +67,18 @@ ig.module('game.entities.guy')
         @vel.y = -@jump
 
     check: (other) ->
+      if other.name
+        if other.name.indexOf('Key') != -1
+          @inventory.push other.color
+          other.kill()
+        if other.name.indexOf('Lock') != -1 and other.untouched
+          lock_color = other.name.split('Entity')[1].split('Lock')[0]
+          if @inventory.indexOf(lock_color) != -1
+            other.unlockEvent()
+            other.locked = false
+            other.untouched = false
+          else
+            other.untouched = false
       @parent()
 
 

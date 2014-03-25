@@ -1,0 +1,12 @@
+Things to teach the player:
+
+Tapping jumps
+Jump over gaps
+Falling down gaps can kill you
+keys can unlock more than just doors
+Coins give points
+Buttons can trigger events
+stuff can fall on you
+down slops can speed you up
+up slopes can slow you down
+

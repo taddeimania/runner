@@ -6,7 +6,7 @@ ig.module('game.entities.triggers.genericTrigger')
     size:
       x: 40
       y: 40
-    checkAgainst: ig.Entity.TYPE.BOTH
+    checkAgainst: ig.Entity.TYPE.A
     _wmDrawBox: true
     _wmBoxColor: 'rgba(100, 0, 0, 0.7)'
     check: (other) ->

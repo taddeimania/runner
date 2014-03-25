@@ -6,7 +6,7 @@ ig.module('game.entities.triggers.scoreTrigger')
     size:
       x: 10
       y: 200
-    checkAgainst: ig.Entity.TYPE.BOTH
+    checkAgainst: ig.Entity.TYPE.A
     _wmDrawBox: true
     _wmBoxColor: 'rgba(196, 255, 0, 0.7)'
     activated: true

@@ -3,13 +3,10 @@ ig.module('game.entities.ui.play')
   'impact.entity'
 ).defines ->
   window.EntityPlay = ig.Entity.extend
-    animSheet: new ig.AnimationSheet 'media/play.png', 137, 13
+    animSheet: new ig.AnimationSheet 'media/play.png', 112, 35
     size:
-      x: 167
-      y: 33
-    offset:
-      x: -15
-      y: -10
+      x: 112
+      y: 35
     init: (x, y, settings) ->
       @parent x, y, settings
       @addAnim 'normal', 1, [0]

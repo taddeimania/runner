@@ -7,7 +7,7 @@ ig.module('game.entities.objects.dynamicLedge')
     size:
       x: 160
       y: 32
-    checkAgainst: ig.Entity.TYPE.BOTH
+    checkAgainst: ig.Entity.TYPE.A
     collides: ig.Entity.COLLIDES.NONE
     gravityFactor: 0
     init: (x, y, settings) ->

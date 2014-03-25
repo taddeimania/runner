@@ -1,4 +1,4 @@
-window.VERSION = '0.06'
+window.VERSION = '0.08'
 window.CURRENT_GAME = undefined
 window.CURRENT_LEVEL = undefined
 window.SCORE = 0
@@ -18,6 +18,7 @@ ig.module('game.main')
   'game.entities.ui.pause',
   'game.entities.ui.quit',
   'game.entities.guy',
+  'game.levels.tutorialLevel',
   'game.levels.firstLevel',
   'game.levels.secondLevel',
   'game.levels.thirdLevel',
@@ -25,6 +26,7 @@ ig.module('game.main')
   'game.levels.fifthLevel',
   'game.levels.title'
 ).defines ->
+
   window.BaseScreen = ig.Game.extend
     font: new ig.Font 'media/font.png'
     gravity: 800
@@ -38,8 +40,11 @@ ig.module('game.main')
       # ig.music.add 'media/music/theme.ogg'
       # ig.music.volume = 0.1
       # ig.music.play()
+      # TODO: Make a tutorial button
+      # TODO: Make a credits button
+      # TODO: Cleanup play now button
       @logo = ig.game.spawnEntity window.EntityLogo, 24, 74
-      @play = ig.game.spawnEntity window.EntityPlay, 24, 154
+      @play = ig.game.spawnEntity window.EntityPlay, 60, 190
       ig.input.bind ig.KEY.MOUSE1, 'click'
       @loadLevel(LevelTitle)
       @guy = ig.game.getEntitiesByType('EntityGuy')[0]
@@ -49,12 +54,13 @@ ig.module('game.main')
       @parent()
       if @play.clicked()
         ig.input.unbind ig.KEY.MOUSE1
-        ig.system.setGame window.MainGame
+        ig.system.setGame window.TutorialGame
+        # ig.system.setGame window.MainGame
     draw: ->
       camera_x = ig.game.screen.x + 18
       @logo.pos.x = @guy.pos.x - 81
       @logo.pos.y = Math.sin((@logo.pos.x / 50) * 8) + 90
-      @play.pos.x = @guy.pos.x - 25
+      @play.pos.x = @guy.pos.x + 5
       if @guy
         @screen.x = @guy.pos.x - 100
       @parent()
@@ -63,15 +69,18 @@ ig.module('game.main')
       @logo.draw()
       @play.draw()
 
+
   window.MainGame = window.BaseScreen.extend
+    get_starting_level: ->
+      window.LevelFirstLevel
     init: ->
       @startingScore = window.SCORE
       window.CURRENT_GAME = window.MainGame
       if !window.CURRENT_LEVEL
-          window.CURRENT_LEVEL = LevelFirstLevel
+          window.CURRENT_LEVEL = @get_starting_level()
       ig.input.bind ig.KEY.MOUSE1, 'jump'
       # DEBUG: SET THIS TO WHATEVER LEVEL YOU WANT TO TEST LEVEL DESIGN
-      window.CURRENT_LEVEL = LevelFifthLevel
+      # window.CURRENT_LEVEL = LevelTutorialLevel
       # END DEBUG
       @loadLevel window.CURRENT_LEVEL
       @guy = ig.game.getEntitiesByType('EntityGuy')[0]
@@ -110,6 +119,16 @@ ig.module('game.main')
       quit.tween({pos: {x: @screen.x + 95, y: 260}}, 0.25).start()
       @guy.kill()
       delete @guy
+
+  window.TutorialGame = window.MainGame.extend
+    # TODO: Skip button
+    get_starting_level: ->
+      window.LevelTutorialLevel
+    draw: ->
+      @parent()
+      camera_x = ig.game.screen.x + 18
+      if @guy
+        @screen.x = @guy.pos.x - 100
 
   ig.System.scaleMode = ig.System.SCALE.CRISP
   ig.main '#canvas', window.StartScreen, 60, 320, 480, 1

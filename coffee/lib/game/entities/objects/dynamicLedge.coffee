@@ -7,7 +7,7 @@ ig.module('game.entities.objects.threeHighEdge')
     size:
       x: 32
       y: 96
-    checkAgainst: ig.Entity.TYPE.BOTH
+    checkAgainst: ig.Entity.TYPE.A
     collides: ig.Entity.COLLIDES.FIXED
     gravityFactor: 0
     init: (x, y, settings) ->
