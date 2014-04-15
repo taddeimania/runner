@@ -18,6 +18,7 @@ ig.module('game.main')
   'game.entities.ui.pause',
   'game.entities.ui.quit',
   'game.entities.guy',
+  'game.inventory.inventory',
   'game.levels.tutorialLevel',
   'game.levels.firstLevel',
   'game.levels.secondLevel',
@@ -54,8 +55,8 @@ ig.module('game.main')
       @parent()
       if @play.clicked()
         ig.input.unbind ig.KEY.MOUSE1
-        ig.system.setGame window.TutorialGame
-        # ig.system.setGame window.MainGame
+        # ig.system.setGame window.TutorialGame
+        ig.system.setGame window.MainGame
     draw: ->
       camera_x = ig.game.screen.x + 18
       @logo.pos.x = @guy.pos.x - 81
@@ -72,8 +73,9 @@ ig.module('game.main')
 
   window.MainGame = window.BaseScreen.extend
     get_starting_level: ->
-      window.LevelFirstLevel
+      window.LevelFourthLevel
     init: ->
+      @inventory = new window.Inventory()
       @startingScore = window.SCORE
       window.CURRENT_GAME = window.MainGame
       if !window.CURRENT_LEVEL

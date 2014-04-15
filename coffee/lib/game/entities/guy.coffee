@@ -45,6 +45,8 @@ ig.module('game.entities.guy')
     draw: ->
       if @vel.x == 0
         @currentAnim = @anims.standing
+      else
+        @currentAnim = @anims.walking
       @parent()
 
     finish: (nextLevel) ->
