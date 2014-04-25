@@ -6,14 +6,19 @@ ig.module('game.inventory.inventory')
 
   window.Inventory = ig.Class.extend
     storage: []
-    init: ->
-      console.log "woah111"
-      @storage.append(new ig.Image('media/blueKey.png'))
 
     addItem: (item) ->
-      serialized_item = new ig.Image item
-      @storage.append(serialized_item)
+      serialized_item = new ig.Image "media/#{item}.png"
+      @storage.push({name: item, item: serialized_item})
+
+    removeItem: (item) ->
+      for object, i in @storage
+        if object.name == item
+          @storage.splice(i, 1)
+          break
 
     draw: ->
+      offset = 0
       for object in @storage
-        object.draw(12, 23)
+        object.item.draw(80, 65)
+        offset = offset + 32

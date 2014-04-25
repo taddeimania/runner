@@ -12,7 +12,6 @@ ig.module('game.main')
   'plugins.collision-map',
   'plugins.tween',
   'game.entities.ui.logo',
-  'game.entities.ui.border',
   'game.entities.ui.play',
   'game.entities.ui.retry',
   'game.entities.ui.pause',
@@ -74,6 +73,7 @@ ig.module('game.main')
   window.MainGame = window.BaseScreen.extend
     get_starting_level: ->
       window.LevelFourthLevel
+
     init: ->
       @inventory = new window.Inventory()
       @startingScore = window.SCORE
@@ -88,7 +88,8 @@ ig.module('game.main')
       @guy = ig.game.getEntitiesByType('EntityGuy')[0]
       guy_x = @guy.pos.x
       @screen.x = guy_x
-      @uiBG = ig.game.spawnEntity window.EntityBorder, 143, 0
+      @uiBG = new ig.Image 'media/uitopborder.png'
+      @pauseButtonGraphic = new ig.Image 'media/pause.png'
       @pauseButton = ig.game.spawnEntity window.EntityPause, guy_x + 40, 65
 
     update: ->
@@ -96,7 +97,6 @@ ig.module('game.main')
       if @deathCondition()
         @killGuy()
       @pauseButton.pos.x = @screen.x + 40
-      @uiBG.pos.x = @screen.x
 
     draw: ->
       @parent()
@@ -104,6 +104,9 @@ ig.module('game.main')
         @retryTween.draw()
         @quitTween.draw()
 
+      @uiBG.draw(0, 0)
+      @pauseButtonGraphic.draw(40, 65)
+      @inventory.draw()
       @font.draw window.SCORE.toString(), 300, 65, ig.Font.ALIGN.RIGHT
 
     deathCondition: ->

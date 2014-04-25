@@ -59,9 +59,10 @@ ig.module('game.entities.guy')
           window.CURRENT_LEVEL = ig.global[nextLevel]
           ig.game.loadLevel window.CURRENT_LEVEL
           ig.game.guy = ig.game.getEntitiesByType('EntityGuy')[0]
-          ig.game.uiBG = ig.game.spawnEntity window.EntityBorder, 143, 0
+          ig.game.uiBG = new ig.Image 'media/uitopborder.png'
           ig.game.screen.x = ig.game.guy.pos.x
           ig.game.tracking = false
+          ig.game.pauseButtonGraphic = new ig.Image 'media/pause.png'
           ig.game.pauseButton = ig.game.spawnEntity window.EntityPause, ig.game.guy.pos.x + 40, 65
 
     checkVerticalMovement: ->
@@ -71,11 +72,14 @@ ig.module('game.entities.guy')
     check: (other) ->
       if other.name
         if other.name.indexOf('Key') != -1
+          key_color = other.name.split('Entity')[1]
           @inventory.push other.color
+          ig.game.inventory.addItem(key_color)
           other.kill()
         if other.name.indexOf('Lock') != -1 and other.untouched
           lock_color = other.name.split('Entity')[1].split('Lock')[0]
           if @inventory.indexOf(lock_color) != -1
+            ig.game.inventory.removeItem("#{lock_color}Key")
             other.unlockEvent()
             other.locked = false
             other.untouched = false
