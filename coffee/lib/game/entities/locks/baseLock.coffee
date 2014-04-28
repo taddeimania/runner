@@ -11,6 +11,7 @@ ig.module('game.entities.locks.baseLock')
       y: 32
     type: ig.Entity.TYPE.B
     collides: ig.Entity.COLLIDES.NEVER
+    checkAgainst: ig.Entity.TYPE.A
     name: undefined
     locked: true
     untouched: true
@@ -23,5 +24,16 @@ ig.module('game.entities.locks.baseLock')
     unlockEvent: ->
       @currentAnim = @anims.grey
       func = new Function(@triggerEvent).bind(@)()
+
+    check: (other) ->
+      if @name.indexOf('Lock') != -1 and @untouched
+        lock_color = @name.split('Entity')[1].split('Lock')[0]
+        if ig.game.guy.inventory.indexOf(lock_color) != -1
+          ig.game.inventory.removeItem("#{lock_color}Key")
+          @unlockEvent()
+          @locked = false
+          @untouched = false
+        else
+          @untouched = false
 
   return

@@ -54,8 +54,8 @@ ig.module('game.main')
       @parent()
       if @play.clicked()
         ig.input.unbind ig.KEY.MOUSE1
-        ig.system.setGame window.TutorialGame
-        # ig.system.setGame window.MainGame
+        # ig.system.setGame window.TutorialGame
+        ig.system.setGame window.MainGame
     draw: ->
       camera_x = ig.game.screen.x + 18
       @logo.pos.x = @guy.pos.x - 81
@@ -72,6 +72,7 @@ ig.module('game.main')
 
   window.MainGame = window.BaseScreen.extend
     get_starting_level: ->
+      # DEBUG: SET THIS TO WHATEVER LEVEL YOU WANT TO TEST LEVEL DESIGN
       window.LevelFourthLevel
 
     init: ->
@@ -81,9 +82,6 @@ ig.module('game.main')
       if !window.CURRENT_LEVEL
           window.CURRENT_LEVEL = @get_starting_level()
       ig.input.bind ig.KEY.MOUSE1, 'jump'
-      # DEBUG: SET THIS TO WHATEVER LEVEL YOU WANT TO TEST LEVEL DESIGN
-      # window.CURRENT_LEVEL = LevelTutorialLevel
-      # END DEBUG
       @loadLevel window.CURRENT_LEVEL
       @guy = ig.game.getEntitiesByType('EntityGuy')[0]
       guy_x = @guy.pos.x

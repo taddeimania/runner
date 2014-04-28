@@ -69,23 +69,4 @@ ig.module('game.entities.guy')
       if  @standing and ig.input.pressed('jump') and ig.input.mouse.y > 100
         @vel.y = -@jump
 
-    check: (other) ->
-      if other.name
-        if other.name.indexOf('Key') != -1
-          key_color = other.name.split('Entity')[1]
-          @inventory.push other.color
-          ig.game.inventory.addItem(key_color)
-          other.kill()
-        if other.name.indexOf('Lock') != -1 and other.untouched
-          lock_color = other.name.split('Entity')[1].split('Lock')[0]
-          if @inventory.indexOf(lock_color) != -1
-            ig.game.inventory.removeItem("#{lock_color}Key")
-            other.unlockEvent()
-            other.locked = false
-            other.untouched = false
-          else
-            other.untouched = false
-      @parent()
-
-
   return
