@@ -54,8 +54,8 @@ ig.module('game.main')
       @parent()
       if @play.clicked()
         ig.input.unbind ig.KEY.MOUSE1
-        # ig.system.setGame window.TutorialGame
-        ig.system.setGame window.MainGame
+        ig.system.setGame window.TutorialGame
+        # ig.system.setGame window.MainGame
     draw: ->
       camera_x = ig.game.screen.x + 18
       @logo.pos.x = @guy.pos.x - 81
