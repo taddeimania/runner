@@ -37,9 +37,9 @@ ig.module('game.main')
 
   window.StartScreen = window.BaseScreen.extend
     init: ->
-      # ig.music.add 'media/music/theme.ogg'
-      # ig.music.volume = 0.1
-      # ig.music.play()
+      ig.music.add 'media/music/theme.ogg'
+      ig.music.volume = 0.3
+      ig.music.play()
       # TODO: Make a tutorial button
       # TODO: Make a credits button
       # TODO: Cleanup play now button
@@ -73,10 +73,12 @@ ig.module('game.main')
   window.MainGame = window.BaseScreen.extend
     get_starting_level: ->
       # DEBUG: SET THIS TO WHATEVER LEVEL YOU WANT TO TEST LEVEL DESIGN
-      window.LevelFourthLevel
+      window.LevelFifthLevel
 
     init: ->
+      @uiBG = new ig.Image 'media/uitopborder.png'
       @inventory = new window.Inventory()
+      @boot_sounds()
       @startingScore = window.SCORE
       window.CURRENT_GAME = window.MainGame
       if !window.CURRENT_LEVEL
@@ -86,9 +88,16 @@ ig.module('game.main')
       @guy = ig.game.getEntitiesByType('EntityGuy')[0]
       guy_x = @guy.pos.x
       @screen.x = guy_x
-      @uiBG = new ig.Image 'media/uitopborder.png'
       @pauseButtonGraphic = new ig.Image 'media/pause.png'
       @pauseButton = ig.game.spawnEntity window.EntityPause, guy_x + 40, 65
+
+    boot_sounds: ->
+      ig.jumpSound = new ig.Sound('media/sound/jump.*')
+      ig.coinSound = new ig.Sound('media/sound/coin.ogg')
+      ig.deathSound = new ig.Sound('media/sound/death.ogg')
+      ig.pickupKeySound = new ig.Sound('media/sound/pickup_key.ogg')
+      ig.unlockSound = new ig.Sound('media/sound/unlock.ogg')
+      ig.crashSound = new ig.Sound('media/sound/thud.ogg')
 
     update: ->
       @parent()
@@ -101,7 +110,6 @@ ig.module('game.main')
       if @retryTween or @quitTween
         @retryTween.draw()
         @quitTween.draw()
-
       @uiBG.draw(0, 0)
       @pauseButtonGraphic.draw(40, 65)
       @inventory.draw()
@@ -121,6 +129,7 @@ ig.module('game.main')
       quit = ig.game.spawnEntity window.EntityQuit, @screen.x + 400, 260
       quit.tween({pos: {x: @screen.x + 95, y: 260}}, 0.25).start()
       @guy.kill()
+      ig.deathSound.play()
       delete @guy
 
   window.TutorialGame = window.MainGame.extend
@@ -135,5 +144,6 @@ ig.module('game.main')
 
   ig.System.scaleMode = ig.System.SCALE.CRISP
   ig.main '#canvas', window.StartScreen, 60, 320, 480, 1
+  ig.soundManager.volume = 0.4
 
   return

@@ -5,8 +5,12 @@ ig.module('game.entities.objects.baseCoin')
   window.EntityBaseCoin = ig.Entity.extend
     animSheet: new ig.AnimationSheet 'media/coins.png', 32, 32
     size:
-      x: 32
-      y: 32
+      x: 22
+      y: 22
+    offset:
+      x: 10
+      y: 10
+
     type: ig.Entity.TYPE.B
     collides: ig.Entity.COLLIDES.NEVER
     checkAgainst: ig.Entity.TYPE.A

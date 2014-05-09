@@ -66,7 +66,8 @@ ig.module('game.entities.guy')
           ig.game.pauseButton = ig.game.spawnEntity window.EntityPause, ig.game.guy.pos.x + 40, 65
 
     checkVerticalMovement: ->
-      if  @standing and ig.input.pressed('jump') and ig.input.mouse.y > 100
+      if @standing and ig.input.pressed('jump') and ig.input.mouse.y > 100
+        ig.jumpSound.play()
         @vel.y = -@jump
 
   return

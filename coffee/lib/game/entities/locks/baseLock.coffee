@@ -30,10 +30,9 @@ ig.module('game.entities.locks.baseLock')
         lock_color = @name.split('Entity')[1].split('Lock')[0]
         if ig.game.guy.inventory.indexOf(lock_color) != -1
           ig.game.inventory.removeItem("#{lock_color}Key")
+          ig.unlockSound.play()
           @unlockEvent()
           @locked = false
-          @untouched = false
-        else
-          @untouched = false
+        @untouched = false
 
   return

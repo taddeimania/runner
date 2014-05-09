@@ -14,10 +14,17 @@ ig.module('game.entities.objects.twoSpikes')
     friction:
       x: 1
       y: 1
+
     init: (x, y, settings) ->
       @parent x, y, settings
       @addAnim 'base', 1, [0]
       @currentAnim = @anims.base
+
+    update: ->
+      @parent()
+      if @vel.y > 0
+        ig.crashSound.play()
+
     collideWith: (other, axis) ->
       if axis == "y" and @angleTo(other) > 0
         ig.game.killGuy()

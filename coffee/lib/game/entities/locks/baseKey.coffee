@@ -24,6 +24,7 @@ ig.module('game.entities.locks.baseKey')
         key_color = @name.split('Entity')[1]
         ig.game.guy.inventory.push @color
         ig.game.inventory.addItem key_color
+        ig.pickupKeySound.play()
         @kill()
       @parent()
 
