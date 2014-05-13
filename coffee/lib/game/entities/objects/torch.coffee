@@ -14,5 +14,6 @@ ig.module('game.entities.objects.torch')
       @parent x, y, settings
       @addAnim 'burn', 0.5, [0, 1]
       @currentAnim = @anims.burn
+    update: ->
 
   return

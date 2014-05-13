@@ -9,5 +9,5 @@ ig.module('game.entities.ui.retry')
       y: 37
     clickHandler: ->
       window.SCORE = ig.game.startingScore
-      ig.system.setGame window.CURRENT_GAME
+      ig.system.setGame window.DeathTransitionScreen
   return

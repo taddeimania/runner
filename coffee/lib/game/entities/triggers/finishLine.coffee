@@ -10,6 +10,8 @@ ig.module('game.entities.triggers.finishLine')
     _wmDrawBox: true
     gravityFactor: 0
     _wmBoxColor: 'rgba(255, 0, 0, 0.7)'
+    update: ->
+    draw: ->
     check: (other) ->
       other.finish @nextLevel
   return

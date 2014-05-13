@@ -9,6 +9,7 @@ ig.module('game.entities.ui.quit')
       y: 40
     clickHandler: ->
       window.SCORE = 0
+      window.LIVES = 0
       window.CURRENT_LEVEL = undefined
       ig.system.setGame(window.StartScreen)
   return

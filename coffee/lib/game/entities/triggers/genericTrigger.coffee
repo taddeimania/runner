@@ -9,6 +9,9 @@ ig.module('game.entities.triggers.genericTrigger')
     checkAgainst: ig.Entity.TYPE.A
     _wmDrawBox: true
     _wmBoxColor: 'rgba(100, 0, 0, 0.7)'
+    soundPlayed: false
+    update: ->
+    draw: ->
     check: (other) ->
       new Function(@triggerEvent).bind(@)()
   return

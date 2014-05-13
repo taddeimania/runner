@@ -19,6 +19,8 @@ ig.module('game.entities.locks.baseKey')
       @addAnim 'color', 1, [@colorIndex]
       @currentAnim = @anims.color
 
+    update: ->
+
     check: (other) ->
       if other == ig.game.guy
         key_color = @name.split('Entity')[1]

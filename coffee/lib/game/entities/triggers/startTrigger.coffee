@@ -10,6 +10,8 @@ ig.module('game.entities.triggers.startTrigger')
     _wmDrawBox: true
     _wmBoxColor: 'rgba(0, 0, 255, 0.7)'
     activated: true
+    update: ->
+    draw: ->
     check: (other) ->
       if @activated
         ig.game.tracking = true

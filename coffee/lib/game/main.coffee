@@ -2,28 +2,33 @@ window.VERSION = '0.08'
 window.CURRENT_GAME = undefined
 window.CURRENT_LEVEL = undefined
 window.SCORE = 0
+window.LIVES = 0
 
 ig.module('game.main')
 .requires(
-  # 'impact.debug.debug',
-  'impact.game',
-  'impact.font',
-  'impact.sound',
-  'plugins.collision-map',
-  'plugins.tween',
-  'game.entities.ui.logo',
-  'game.entities.ui.play',
-  'game.entities.ui.retry',
-  'game.entities.ui.pause',
-  'game.entities.ui.quit',
-  'game.entities.guy',
-  'game.inventory.inventory',
-  'game.levels.tutorialLevel',
-  'game.levels.firstLevel',
-  'game.levels.secondLevel',
-  'game.levels.thirdLevel',
-  'game.levels.fourthLevel',
-  'game.levels.fifthLevel',
+  # 'impact.debug.debug'
+  'impact.game'
+  'impact.font'
+  'impact.sound'
+  'plugins.collision-map'
+  'plugins.tween'
+  'game.quotes'
+  'game.entities.ui.logo'
+  'game.entities.ui.dither'
+  'game.entities.ui.play'
+  'game.entities.ui.retry'
+  'game.entities.ui.pause'
+  'game.entities.ui.paused'
+  'game.entities.ui.quit'
+  'game.entities.guy'
+  'game.inventory.inventory'
+  'game.levels.tutorialLevel'
+  'game.levels.firstLevel'
+  'game.levels.secondLevel'
+  'game.levels.thirdLevel'
+  'game.levels.fourthLevel'
+  'game.levels.fifthLevel'
+  'game.levels.sixthLevel'
   'game.levels.title'
 ).defines ->
 
@@ -73,7 +78,7 @@ ig.module('game.main')
   window.MainGame = window.BaseScreen.extend
     get_starting_level: ->
       # DEBUG: SET THIS TO WHATEVER LEVEL YOU WANT TO TEST LEVEL DESIGN
-      window.LevelFifthLevel
+      window.LevelSixthLevel
 
     init: ->
       @uiBG = new ig.Image 'media/uitopborder.png'
@@ -89,7 +94,7 @@ ig.module('game.main')
       guy_x = @guy.pos.x
       @screen.x = guy_x
       @pauseButtonGraphic = new ig.Image 'media/pause.png'
-      @pauseButton = ig.game.spawnEntity window.EntityPause, guy_x + 40, 65
+      @pauseButton = ig.game.spawnEntity window.EntityPause, guy_x + 40, 35
 
     boot_sounds: ->
       ig.jumpSound = new ig.Sound('media/sound/jump.*')
@@ -98,22 +103,20 @@ ig.module('game.main')
       ig.pickupKeySound = new ig.Sound('media/sound/pickup_key.ogg')
       ig.unlockSound = new ig.Sound('media/sound/unlock.ogg')
       ig.crashSound = new ig.Sound('media/sound/thud.ogg')
+      ig.transportSound = new ig.Sound('media/sound/transport.ogg')
 
     update: ->
       @parent()
       if @deathCondition()
         @killGuy()
-      @pauseButton.pos.x = @screen.x + 40
+      @pauseButton.pos.x = @screen.x + 20
 
     draw: ->
       @parent()
-      if @retryTween or @quitTween
-        @retryTween.draw()
-        @quitTween.draw()
       @uiBG.draw(0, 0)
-      @pauseButtonGraphic.draw(40, 65)
+      @pauseButtonGraphic.draw(40, 35)
       @inventory.draw()
-      @font.draw window.SCORE.toString(), 300, 65, ig.Font.ALIGN.RIGHT
+      @font.draw window.SCORE.toString(), 300, 45, ig.Font.ALIGN.RIGHT
 
     deathCondition: ->
       @guy and ((@guy.pos.y > @screen.y + 480) or (@screen.x > @guy.pos.x + 40))
@@ -121,6 +124,14 @@ ig.module('game.main')
     pause: ->
       ig.Timer.timeScale = if ig.Timer.timeScale == 0 then 1 else 0
       @_paused = ig.Timer.timeScale == 0
+      if @_paused
+        @dither = ig.game.spawnEntity window.EntityDither, @screen.x, 0
+        @paused_graphic = ig.game.spawnEntity window.EntityPaused, @screen.x + 80, 180
+        ig.music.pause()
+      else
+        @paused_graphic.kill()
+        @dither.kill()
+        ig.music.play()
 
     killGuy: ->
       @pauseButton.kill()
@@ -129,8 +140,35 @@ ig.module('game.main')
       quit = ig.game.spawnEntity window.EntityQuit, @screen.x + 400, 260
       quit.tween({pos: {x: @screen.x + 95, y: 260}}, 0.25).start()
       @guy.kill()
+      window.LIVES -= 1
       ig.deathSound.play()
       delete @guy
+
+  window.TransitionScreen = window.BaseScreen.extend
+    gravity: 0
+    get_quote: ->
+      new window.Quotes().get_random_quote()
+    init: ->
+      @quote = @get_quote()
+      @gameTimer = new ig.Timer()
+      @logo = new ig.Image('media/logo.png')
+      @guy = new ig.Image('media/guy.png')
+
+    draw: ->
+      @parent()
+      @logo.draw(18, 50)
+      @guy.draw(100, 200, 0, 0, 32, 40)
+      @font.draw "x  #{window.LIVES}", 165, 215, ig.Font.ALIGN.LEFT
+      @font.draw @quote, 160, 315, ig.Font.ALIGN.CENTER
+
+    update: ->
+      @parent()
+      if @gameTimer.delta() > 2
+        ig.system.setGame window.CURRENT_GAME
+
+  window.DeathTransitionScreen = window.TransitionScreen.extend
+    get_quote: ->
+      new window.Quotes().get_random_bad_quote()
 
   window.TutorialGame = window.MainGame.extend
     # TODO: Skip button

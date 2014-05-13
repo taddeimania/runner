@@ -20,5 +20,5 @@ ig.module('game.inventory.inventory')
     draw: ->
       offset = 0
       for object in @storage
-        object.item.draw(80, 65)
+        object.item.draw(80, 35)
         offset = offset + 32

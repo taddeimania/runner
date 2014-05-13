@@ -11,6 +11,8 @@ ig.module('game.entities.triggers.scoreTrigger')
     _wmBoxColor: 'rgba(196, 255, 0, 0.7)'
     activated: true
     value: undefined
+    update: ->
+    draw: ->
     check: (other) ->
       if @activated
         window.SCORE += if !@value then 1 else @value

@@ -25,6 +25,8 @@ ig.module('game.entities.locks.baseLock')
       @currentAnim = @anims.grey
       func = new Function(@triggerEvent).bind(@)()
 
+    update: ->
+
     check: (other) ->
       if @name.indexOf('Lock') != -1 and @untouched
         lock_color = @name.split('Entity')[1].split('Lock')[0]

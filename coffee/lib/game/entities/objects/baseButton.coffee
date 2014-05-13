@@ -17,6 +17,7 @@ ig.module('game.entities.objects.baseButton')
       @addAnim 'down', 1, [1]
       @currentAnim = @anims.up
     triggerEvent: ->
+    update: ->
     pressDown: ->
       @pressed = true
       @currentAnim = @anims.down
