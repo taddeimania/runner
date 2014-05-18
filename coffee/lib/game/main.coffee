@@ -78,7 +78,7 @@ ig.module('game.main')
   window.MainGame = window.BaseScreen.extend
     get_starting_level: ->
       # DEBUG: SET THIS TO WHATEVER LEVEL YOU WANT TO TEST LEVEL DESIGN
-      window.LevelSixthLevel
+      window.LevelFifthLevel
 
     init: ->
       @uiBG = new ig.Image 'media/uitopborder.png'
