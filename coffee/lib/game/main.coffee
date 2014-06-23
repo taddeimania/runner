@@ -42,7 +42,7 @@ ig.module('game.main')
 
   window.StartScreen = window.BaseScreen.extend
     init: ->
-      ig.music.add 'media/music/theme.ogg'
+      ig.music.add 'media/music/hyperbole_looped.ogg'
       ig.music.volume = 0.3
       ig.music.play()
       # TODO: Make a tutorial button
@@ -78,7 +78,7 @@ ig.module('game.main')
   window.MainGame = window.BaseScreen.extend
     get_starting_level: ->
       # DEBUG: SET THIS TO WHATEVER LEVEL YOU WANT TO TEST LEVEL DESIGN
-      window.LevelFifthLevel
+      window.LevelFirstLevel
 
     init: ->
       @uiBG = new ig.Image 'media/uitopborder.png'

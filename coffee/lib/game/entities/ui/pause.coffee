@@ -11,9 +11,6 @@ ig.module('game.entities.ui.pause')
     clickHandler: ->
       started = ig.game.getEntitiesByType('EntityStartTrigger')[0]
       ig.game.tracking = ig.game.tracking == false ? true : false
-      # I hate this code and it's hacky and i wish everyone would die.
-      if started.activated
-          ig.game.tracking = false
       ig.game.pause()
 
   return
