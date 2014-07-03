@@ -37,14 +37,17 @@ ig.module('game.main')
     gravity: 800
     draw: ->
       @parent()
-      if (@guy and !@guy.finished and @tracking)
-        @screen.x += 2
+      if @guy
+        if @guy.pos and @guy.pos.y < 250
+          @screen.y = @guy.pos.y - 250
+        if !@guy.finished and @tracking
+          @screen.x += 2
 
   window.StartScreen = window.BaseScreen.extend
     init: ->
-      ig.music.add 'media/music/hyperbole_looped.ogg'
+      ig.music.add 'media/music/intro.mp3'
       ig.music.volume = 0.3
-      ig.music.play()
+      # ig.music.play()
       # TODO: Make a tutorial button
       # TODO: Make a credits button
       # TODO: Cleanup play now button
@@ -78,7 +81,7 @@ ig.module('game.main')
   window.MainGame = window.BaseScreen.extend
     get_starting_level: ->
       # DEBUG: SET THIS TO WHATEVER LEVEL YOU WANT TO TEST LEVEL DESIGN
-      window.LevelFirstLevel
+      window.LevelSixthLevel
 
     init: ->
       @uiBG = new ig.Image 'media/uitopborder.png'
@@ -110,6 +113,7 @@ ig.module('game.main')
       if @deathCondition()
         @killGuy()
       @pauseButton.pos.x = @screen.x + 20
+      @pauseButton.pos.x = @screen.x + 20
 
     draw: ->
       @parent()
@@ -125,8 +129,8 @@ ig.module('game.main')
       ig.Timer.timeScale = if ig.Timer.timeScale == 0 then 1 else 0
       @_paused = ig.Timer.timeScale == 0
       if @_paused
-        @dither = ig.game.spawnEntity window.EntityDither, @screen.x, 0
-        @paused_graphic = ig.game.spawnEntity window.EntityPaused, @screen.x + 80, 180
+        @dither = ig.game.spawnEntity window.EntityDither, @screen.x, @screen.y
+        @paused_graphic = ig.game.spawnEntity window.EntityPaused, @screen.x + 80, @screen.y + 180
         ig.music.pause()
       else
         @paused_graphic.kill()
