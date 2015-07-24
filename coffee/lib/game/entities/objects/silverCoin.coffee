@@ -1,4 +1,4 @@
-ig.module('game.entities.objects.copperCoin')
+ig.module('game.entities.objects.silverCoin')
 .requires(
   'game.entities.objects.baseCoin'
 ).defines ->
