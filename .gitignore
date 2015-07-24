@@ -7,3 +7,4 @@ weltmeister.html
 .idea/
 server.py
 node_modules/
+.direnv/
