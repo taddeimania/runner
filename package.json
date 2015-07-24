@@ -9,5 +9,8 @@
     "grunt-contrib-watch": "",
     "coffee-script": "~1.7.1"
   },
-  "author": "Joel Taddei @taddeimania"
+  "author": "Joel Taddei @taddeimania",
+  "devDependencies": {
+    "grunt-shell": "^1.1.2"
+  }
 }
